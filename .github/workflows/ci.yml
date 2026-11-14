@@ -1,0 +1,42 @@
+name: Lab 1 - Pipeline CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  # Estágio 1: Build — instalar dependências
+  Build:
+    name: "Build — instalar dependências"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+  # Estágio 2: Test — executar testes unitários
+  Test:
+    name: "Test — executar testes unitários"
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Executar pytest
+        run: pytest test_calculadora.py --tb=short
