@@ -3,7 +3,7 @@ from calculadora import somar, subtrair, multiplicar, dividir
 
 
 def test_somar():
-    assert somar(2, 3) == 5
+    assert somar(2, 3) == 99 #valor errado intencionalmente
     assert somar(-1, 1) == 0
 
 
